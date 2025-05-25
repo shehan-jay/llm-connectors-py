@@ -57,12 +57,13 @@ async def test_gemini_chat_method(mock_google_api_key):
     mock_chat.send_message_async = AsyncMock(return_value=mock_response)
     
     mock_model = AsyncMock()
-    mock_model.start_chat_async = AsyncMock(return_value=mock_chat)  # Fixed method name
+    mock_model.start_chat_async = AsyncMock(return_value=mock_chat)
 
-    with patch('google.generativeai.GenerativeModel.from_api_key', return_value=mock_model):
+    with patch('google.generativeai.generative_models.GenerativeModel', return_value=mock_model):
         from llm_connectors import GeminiConnector
         connector = GeminiConnector(api_key=mock_google_api_key)
         prompt = "Hello, Gemini!"
         response = await connector.chat(prompt)
         
         assert response == "Hi there!"
+
