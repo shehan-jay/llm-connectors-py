@@ -1,6 +1,7 @@
 import pytest
 from unittest.mock import AsyncMock, MagicMock, patch
 import os
+from connectors.chatgpt_connector import ChatGPTConnector  # Import the class
 
 @pytest.fixture
 def mock_openai_api_key():
@@ -23,7 +24,6 @@ def mock_env_vars():
 
 def test_chatgpt_connector_initialization(mock_openai_api_key):
     """Test ChatGPT connector initialization."""
-    from llm_connectors import ChatGPTConnector
     connector = ChatGPTConnector(api_key=mock_openai_api_key)
     assert connector.api_key == mock_openai_api_key
 
@@ -81,7 +81,6 @@ async def test_chatgpt_generate_text(mock_openai_api_key):
     mock_client.chat = mock_chat
 
     with patch('openai.AsyncOpenAI', return_value=mock_client):
-        from llm_connectors import ChatGPTConnector
         connector = ChatGPTConnector(api_key=mock_openai_api_key)
         prompt = "Write a test"
         response = await connector.generate_text(prompt)
