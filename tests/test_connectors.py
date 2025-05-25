@@ -53,6 +53,7 @@ async def test_chatgpt_chat_method(mock_openai_api_key):
         response = await connector.chat(messages)
         assert isinstance(response, dict)
         assert "content" in response
+        assert response["content"] == "Hi there!"
 
 @pytest.mark.asyncio
 async def test_gemini_chat_method(mock_google_api_key):
