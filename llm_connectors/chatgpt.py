@@ -26,7 +26,7 @@ class ChatGPTConnector(BaseConnector):
         **kwargs: Any
     ) -> Dict[str, Any]:
         """Send a chat request to ChatGPT."""
-        response = await self.client.chat.completions.create(
+        response = self.client.chat.completions.create(
             model=kwargs.get("model", "gpt-3.5-turbo"),
             messages=cast(Any, messages),
             temperature=temperature,
@@ -48,7 +48,7 @@ class ChatGPTConnector(BaseConnector):
         **kwargs: Any
     ) -> str:
         """Generate text using ChatGPT."""
-        response = await self.client.chat.completions.create(
+        response = self.client.chat.completions.create(
             model=kwargs.get("model", "gpt-3.5-turbo"),
             messages=[{"role": "user", "content": prompt}],
             temperature=temperature,
@@ -63,9 +63,9 @@ class ChatGPTConnector(BaseConnector):
         **kwargs: Any
     ) -> List[float]:
         """Get embeddings for the input text using OpenAI's embedding model."""
-        response = await self.client.embeddings.create(
+        response = self.client.embeddings.create(
             model=kwargs.get("model", "text-embedding-ada-002"),
             input=text,
             **kwargs
         )
-        return response.data[0].embedding 
+        return cast(List[float], response.data[0].embedding) 
