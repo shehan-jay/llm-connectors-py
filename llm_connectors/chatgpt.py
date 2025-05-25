@@ -16,7 +16,7 @@ class ChatGPTConnector(BaseConnector):
             **kwargs: Additional OpenAI client configuration
         """
         super().__init__(api_key, **kwargs)
-        self.client = openai.OpenAI(api_key=api_key, **kwargs)
+        self.client = openai.AsyncOpenAI(api_key=api_key, **kwargs)
 
     async def chat(
         self,
@@ -26,7 +26,7 @@ class ChatGPTConnector(BaseConnector):
         **kwargs: Any
     ) -> Dict[str, Any]:
         """Send a chat request to ChatGPT."""
-        response = self.client.chat.completions.create(
+        response = await self.client.chat.completions.create(
             model=kwargs.get("model", "gpt-3.5-turbo"),
             messages=cast(Any, messages),
             temperature=temperature,
@@ -48,7 +48,7 @@ class ChatGPTConnector(BaseConnector):
         **kwargs: Any
     ) -> str:
         """Generate text using ChatGPT."""
-        response = self.client.chat.completions.create(
+        response = await self.client.chat.completions.create(
             model=kwargs.get("model", "gpt-3.5-turbo"),
             messages=[{"role": "user", "content": prompt}],
             temperature=temperature,
@@ -63,7 +63,7 @@ class ChatGPTConnector(BaseConnector):
         **kwargs: Any
     ) -> List[float]:
         """Get embeddings for the input text using OpenAI's embedding model."""
-        response = self.client.embeddings.create(
+        response = await self.client.embeddings.create(
             model=kwargs.get("model", "text-embedding-ada-002"),
             input=text,
             **kwargs

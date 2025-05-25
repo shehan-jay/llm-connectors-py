@@ -39,7 +39,7 @@ class GeminiConnector(BaseConnector):
             A dictionary containing the response from Gemini.
         """
         chat = self.model.start_chat(history=[])
-        response = chat.send_message(
+        response = await chat.send_message_async(
             messages[-1]["content"],
             generation_config=genai.types.GenerationConfig(
                 temperature=temperature,
@@ -70,7 +70,7 @@ class GeminiConnector(BaseConnector):
         Returns:
             The generated text.
         """
-        response = self.model.generate_content(
+        response = await self.model.generate_content_async(
             prompt,
             generation_config=genai.types.GenerationConfig(
                 temperature=temperature,

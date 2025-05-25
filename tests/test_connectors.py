@@ -46,7 +46,7 @@ async def test_chatgpt_chat_method(mock_openai_api_key):
     mock_client = AsyncMock()
     mock_client.chat = mock_chat
 
-    with patch('openai.OpenAI', return_value=mock_client):
+    with patch('openai.AsyncOpenAI', return_value=mock_client):
         from llm_connectors import ChatGPTConnector
         connector = ChatGPTConnector(api_key=mock_openai_api_key)
         messages = [{"role": "user", "content": "Hello"}]
@@ -61,7 +61,7 @@ async def test_gemini_chat_method(mock_google_api_key):
     mock_response.text = "Hi there!"
     
     mock_chat = AsyncMock()
-    mock_chat.send_message = AsyncMock(return_value=mock_response)
+    mock_chat.send_message_async = AsyncMock(return_value=mock_response)
     
     mock_model = AsyncMock()
     mock_model.start_chat = MagicMock(return_value=mock_chat)
@@ -87,7 +87,7 @@ async def test_chatgpt_generate_text(mock_openai_api_key):
     mock_client = AsyncMock()
     mock_client.chat = mock_chat
 
-    with patch('openai.OpenAI', return_value=mock_client):
+    with patch('openai.AsyncOpenAI', return_value=mock_client):
         from llm_connectors import ChatGPTConnector
         connector = ChatGPTConnector(api_key=mock_openai_api_key)
         prompt = "Write a test"
@@ -102,7 +102,7 @@ async def test_gemini_generate_text(mock_google_api_key):
     mock_response.text = "This is a test response"
     
     mock_model = AsyncMock()
-    mock_model.generate_content = AsyncMock(return_value=mock_response)
+    mock_model.generate_content_async = AsyncMock(return_value=mock_response)
 
     with patch('google.generativeai.GenerativeModel', return_value=mock_model):
         from llm_connectors import GeminiConnector
