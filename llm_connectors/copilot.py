@@ -1,10 +1,10 @@
-from typing import Dict, Any, Optional, List
+from typing import Any, Dict, List, Optional
 from .base import BaseConnector
 
 class CopilotConnector(BaseConnector):
     """Connector for Microsoft Copilot API (placeholder)."""
     
-    def __init__(self, api_key: str, **kwargs):
+    def __init__(self, api_key: str, **kwargs: Any) -> None:
         """Initialize the Copilot connector.
         
         Args:
@@ -15,11 +15,13 @@ class CopilotConnector(BaseConnector):
         # TODO: Implement Microsoft Copilot API client initialization
         raise NotImplementedError("Microsoft Copilot API integration is not yet available")
     
-    async def chat(self,
-                  messages: List[Dict[str, str]],
-                  temperature: float = 0.7,
-                  max_tokens: Optional[int] = None,
-                  **kwargs) -> Dict[str, Any]:
+    async def chat(
+        self,
+        messages: List[Dict[str, str]],
+        temperature: float = 0.7,
+        max_tokens: Optional[int] = None,
+        **kwargs: Any
+    ) -> Dict[str, Any]:
         """Send a chat request to Copilot (placeholder).
         
         Args:
@@ -33,11 +35,13 @@ class CopilotConnector(BaseConnector):
         """
         raise NotImplementedError("Microsoft Copilot API integration is not yet available")
     
-    async def generate_text(self,
-                          prompt: str,
-                          temperature: float = 0.7,
-                          max_tokens: Optional[int] = None,
-                          **kwargs) -> str:
+    async def generate_text(
+        self,
+        prompt: str,
+        temperature: float = 0.7,
+        max_tokens: Optional[int] = None,
+        **kwargs: Any
+    ) -> str:
         """Generate text using Copilot (placeholder).
         
         Args:
@@ -51,9 +55,11 @@ class CopilotConnector(BaseConnector):
         """
         raise NotImplementedError("Microsoft Copilot API integration is not yet available")
     
-    async def get_embeddings(self,
-                           text: str,
-                           **kwargs) -> List[float]:
+    async def get_embeddings(
+        self,
+        text: str,
+        **kwargs: Any
+    ) -> List[float]:
         """Get embeddings for the input text using Copilot (placeholder).
         
         Args:

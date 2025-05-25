@@ -1,10 +1,10 @@
 from abc import ABC, abstractmethod
-from typing import Dict, Any, Optional, List
+from typing import Any, Dict, List, Optional
 
 class BaseConnector(ABC):
     """Base class for all AI platform connectors."""
     
-    def __init__(self, api_key: str, **kwargs):
+    def __init__(self, api_key: str, **kwargs: Any) -> None:
         """Initialize the connector with API key and optional parameters.
         
         Args:
@@ -15,11 +15,13 @@ class BaseConnector(ABC):
         self.config = kwargs
     
     @abstractmethod
-    async def chat(self, 
-                  messages: List[Dict[str, str]], 
-                  temperature: float = 0.7,
-                  max_tokens: Optional[int] = None,
-                  **kwargs) -> Dict[str, Any]:
+    async def chat(
+        self,
+        messages: List[Dict[str, str]],
+        temperature: float = 0.7,
+        max_tokens: Optional[int] = None,
+        **kwargs: Any
+    ) -> Dict[str, Any]:
         """Send a chat request to the AI platform.
         
         Args:
@@ -34,11 +36,13 @@ class BaseConnector(ABC):
         pass
     
     @abstractmethod
-    async def generate_text(self,
-                          prompt: str,
-                          temperature: float = 0.7,
-                          max_tokens: Optional[int] = None,
-                          **kwargs) -> str:
+    async def generate_text(
+        self,
+        prompt: str,
+        temperature: float = 0.7,
+        max_tokens: Optional[int] = None,
+        **kwargs: Any
+    ) -> str:
         """Generate text based on a prompt.
         
         Args:
@@ -53,9 +57,11 @@ class BaseConnector(ABC):
         pass
     
     @abstractmethod
-    async def get_embeddings(self,
-                           text: str,
-                           **kwargs) -> List[float]:
+    async def get_embeddings(
+        self,
+        text: str,
+        **kwargs: Any
+    ) -> List[float]:
         """Get embeddings for the input text.
         
         Args:

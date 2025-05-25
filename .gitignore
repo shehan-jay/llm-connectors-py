@@ -74,4 +74,7 @@ log/
 *.pyc
 .pytest_cache/
 .coverage
-htmlcov/ 
+htmlcov/
+
+# PyPI
+.pypirc 

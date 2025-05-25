@@ -1,10 +1,10 @@
-from typing import Dict, Any, Optional, List
+from typing import Any, Dict, List, Optional
 from .base import BaseConnector
 
 class DeepSeekConnector(BaseConnector):
     """Connector for DeepSeek API (placeholder)."""
     
-    def __init__(self, api_key: str, **kwargs):
+    def __init__(self, api_key: str, **kwargs: Any) -> None:
         """Initialize the DeepSeek connector.
         
         Args:
@@ -15,11 +15,13 @@ class DeepSeekConnector(BaseConnector):
         # TODO: Implement DeepSeek API client initialization
         raise NotImplementedError("DeepSeek API integration is not yet available")
     
-    async def chat(self,
-                  messages: List[Dict[str, str]],
-                  temperature: float = 0.7,
-                  max_tokens: Optional[int] = None,
-                  **kwargs) -> Dict[str, Any]:
+    async def chat(
+        self,
+        messages: List[Dict[str, str]],
+        temperature: float = 0.7,
+        max_tokens: Optional[int] = None,
+        **kwargs: Any
+    ) -> Dict[str, Any]:
         """Send a chat request to DeepSeek (placeholder).
         
         Args:
@@ -33,11 +35,13 @@ class DeepSeekConnector(BaseConnector):
         """
         raise NotImplementedError("DeepSeek API integration is not yet available")
     
-    async def generate_text(self,
-                          prompt: str,
-                          temperature: float = 0.7,
-                          max_tokens: Optional[int] = None,
-                          **kwargs) -> str:
+    async def generate_text(
+        self,
+        prompt: str,
+        temperature: float = 0.7,
+        max_tokens: Optional[int] = None,
+        **kwargs: Any
+    ) -> str:
         """Generate text using DeepSeek (placeholder).
         
         Args:
@@ -51,9 +55,11 @@ class DeepSeekConnector(BaseConnector):
         """
         raise NotImplementedError("DeepSeek API integration is not yet available")
     
-    async def get_embeddings(self,
-                           text: str,
-                           **kwargs) -> List[float]:
+    async def get_embeddings(
+        self,
+        text: str,
+        **kwargs: Any
+    ) -> List[float]:
         """Get embeddings for the input text using DeepSeek (placeholder).
         
         Args:

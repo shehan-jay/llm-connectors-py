@@ -8,6 +8,37 @@ A Python library providing connectors for popular AI platforms including ChatGPT
 pip install llm-connectors
 ```
 
+## Development
+
+### Setup
+
+1. Clone the repository
+2. Install development dependencies:
+```bash
+pip install -e ".[dev]"
+```
+
+### Testing
+
+```bash
+pytest
+```
+
+### Publishing to PyPI
+
+1. Copy `.pypirc.template` to `.pypirc`
+2. Get your API token from PyPI (https://pypi.org/manage/account/token/)
+3. Build the package:
+```bash
+python -m build
+```
+4. Upload to PyPI:
+```bash
+twine upload dist/*
+```
+
+Note: Never commit your `.pypirc` file as it contains sensitive authentication information.
+
 ## Usage
 
 ### ChatGPT

@@ -1,0 +1,18 @@
+[distutils]
+index-servers =
+    pypi
+    testpypi
+
+[pypi]
+repository = https://upload.pypi.org/legacy/
+username = __token__
+
+[testpypi]
+repository = https://test.pypi.org/legacy/
+username = __token__
+
+# Instructions:
+# 1. Copy this file to .pypirc
+# 2. Get your API token from PyPI (https://pypi.org/manage/account/token/)
+# 3. When uploading, you'll be prompted for your token
+# 4. Never commit .pypirc to version control 
