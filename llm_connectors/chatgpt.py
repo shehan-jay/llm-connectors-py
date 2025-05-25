@@ -38,7 +38,7 @@ class ChatGPTConnector(BaseConnector):
             max_tokens=max_tokens,
             **kwargs
         )
-        return response.model_dump()
+        return await response.model_dump()
     
     async def generate_text(self,
                           prompt: str,
