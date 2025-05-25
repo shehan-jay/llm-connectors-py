@@ -2,6 +2,7 @@ import pytest
 from unittest.mock import AsyncMock, MagicMock, patch
 import os
 from connectors.chatgpt_connector import ChatGPTConnector  # Import the class
+from connectors.gemini_connector import GeminiConnector  # Corrected import
 
 @pytest.fixture
 def mock_openai_api_key():
@@ -29,7 +30,6 @@ def test_chatgpt_connector_initialization(mock_openai_api_key):
 
 def test_gemini_connector_initialization(mock_google_api_key):
     """Test Gemini connector initialization."""
-    from llm_connectors import GeminiConnector
     connector = GeminiConnector(api_key=mock_google_api_key)
     assert connector.api_key == mock_google_api_key
 
@@ -60,7 +60,6 @@ async def test_gemini_chat_method(mock_google_api_key):
     mock_model.start_chat_async = AsyncMock(return_value=mock_chat)
 
     with patch('google.generativeai.generative_models.GenerativeModel', return_value=mock_model):
-        from llm_connectors import GeminiConnector
         connector = GeminiConnector(api_key=mock_google_api_key)
         prompt = "Hello, Gemini!"
         response = await connector.chat(prompt)
