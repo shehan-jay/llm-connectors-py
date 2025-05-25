@@ -26,6 +26,8 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        pip config set global.index-url https://pypi.org/simple
+        pip install -v google-generativeai==0.8.5
         pip install -e ".[dev]"
     
     - name: Lint with flake8
