@@ -34,26 +34,18 @@ def test_gemini_connector_initialization(mock_google_api_key):
     assert connector.api_key == mock_google_api_key
 
 @pytest.mark.asyncio
-async def test_chatgpt_chat_method(mock_openai_api_key):
-    """Test ChatGPT chat method with mock response."""
-    mock_completion = AsyncMock()
-    mock_completion.choices = [AsyncMock()]
-    mock_completion.choices[0].message.content = "Hi there!"
-    
-    mock_chat = AsyncMock()
-    mock_chat.completions.create = AsyncMock(return_value=mock_completion)
-    
-    mock_client = AsyncMock()
-    mock_client.chat = mock_chat
+async def test_chatgpt_chat_method():
+    # Arrange
+    connector = ChatGPTConnector(api_key="test_key")
+    prompt = "Hello, how are you?"
 
-    with patch('openai.AsyncOpenAI', return_value=mock_client):
-        from llm_connectors import ChatGPTConnector
-        connector = ChatGPTConnector(api_key=mock_openai_api_key)
-        messages = [{"role": "user", "content": "Hello"}]
-        response = await connector.chat(messages)
-        assert isinstance(response, dict)
-        assert "content" in response
-        assert response["content"] == "Hi there!"
+    # Act
+    response = await connector.chat(prompt)
+
+    # Assert
+    assert isinstance(response, dict)
+    assert "message" in response  # Example additional check
+    assert response["message"] == "Expected response"  # Replace with actual expected value
 
 @pytest.mark.asyncio
 async def test_gemini_chat_method(mock_google_api_key):
@@ -112,3 +104,4 @@ async def test_gemini_generate_text(mock_google_api_key):
         response = await connector.generate_text(prompt)
         assert isinstance(response, str)
         assert len(response) > 0 
+
